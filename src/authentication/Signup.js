@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -33,6 +34,8 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
 
+  const navigate = useNavigate();
+
     const [data , setData] = useState({
         firstName : "",
         lastName : "",
@@ -52,6 +55,8 @@ export default function SignUp() {
     console.log(data);
     const allUsers = JSON.parse(localStorage.getItem("users"));
     localStorage.setItem("users" , JSON.stringify([...(allUsers || []) , data]))
+    navigate("/login");
+
   };
 
   return (
@@ -72,7 +77,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate  sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -132,16 +137,16 @@ export default function SignUp() {
               </Grid>
             </Grid>
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSubmit}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

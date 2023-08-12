@@ -11,7 +11,9 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { MyContext } from '../App';
 
 
 function Copyright(props) {
@@ -32,13 +34,47 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
+
+  const { auth, setAuth } = React.useContext(MyContext);
+
+  const navigate = useNavigate();
+
+  const [currentUser , setCurrentUser] = React.useState({
+    email : "",
+    password : ""
+  })
+
+  useEffect(()=>{
+   
+    // console.log(newUsers , "nu")
+
+    // isLoggedIn(true);
+  } , [])
+
+  const handleChange = (e) => {
+    const {name , value} = e.target;
+    setCurrentUser((prev) => ({
+      ...prev,
+      [name] : value
+    }))
+  }
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(true){
-        localStorage.setItem("token" , JSON.stringify(true))
-        // window.reload();
-    }
-  };
+    console.log(currentUser , "cu")
+
+    const userDataFromStorgae = JSON.parse(localStorage.getItem("users"))
+      const newUsers = userDataFromStorgae.filter((user)=>{
+        return user.email === currentUser.email && user.password === currentUser.password;
+     })
+
+    if(newUsers.length > 0){
+      localStorage.setItem("token" , JSON.stringify(true))   
+      setAuth(true);
+      navigate("/home");
+             
+  }};
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -74,7 +110,7 @@ export default function SignInSide() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate  sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -83,6 +119,7 @@ export default function SignInSide() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={handleChange}
                 autoFocus
               />
               <TextField
@@ -93,6 +130,7 @@ export default function SignInSide() {
                 label="Password"
                 type="password"
                 id="password"
+                onChange={handleChange}
                 autoComplete="current-password"
               />
               <FormControlLabel
@@ -104,6 +142,7 @@ export default function SignInSide() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
               >
                 Sign In
               </Button>

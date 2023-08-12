@@ -8,6 +8,12 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { Button } from '@mui/material';
+import { MyContext } from '../App';
+import { useContext } from "react";
+import { Navigate, useNavigate } from 'react-router-dom';
+
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,6 +58,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const navigate = useNavigate();
+  const {auth , setAuth} = useContext(MyContext);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -73,6 +81,16 @@ export default function SearchAppBar() {
           >
             Wanders Club
           </Typography>
+          {
+            auth ? 
+            <Button sx = {{color : "white"}} onClick = {()=>{localStorage.removeItem("token"); setAuth(false); Navigate("/login");}}>Logout</Button>
+            :
+            <Button sx = {{color : "white"}} onClick = {()=> navigate("/signup")}>LogIn</Button>
+             
+           
+
+
+          }
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

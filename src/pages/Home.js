@@ -1,13 +1,19 @@
-import {Container, Typography } from "@mui/material";
+import {Button, Container, Typography } from "@mui/material";
 import TourCard from "../components/Tourcard";
 import Grid from '@mui/material/Grid';
 import cities from "../utility/data.json";
-import { Link, Outlet } from "react-router-dom";
+import {Outlet, useNavigate, } from "react-router-dom";
+import { MyContext } from "../App";
+import { useContext } from "react";
+
 
 const Home = () => {
+  const {setAuth} = useContext(MyContext);
+ 
+
+  const navigate = useNavigate();
     return (
         <div>
-    
       <Container sx = {{marginY : 5 }}>
       {
         cities.map((city)=>{
@@ -19,13 +25,8 @@ const Home = () => {
                 <Grid container spacing={2}>
                 {
                   city.tours.map((tour , index) => 
-                    
-                //   <Link to = "/Tour">
                   <TourCard
                   tour = {tour} key = {index}/>
-                //    </Link>
-                  
-
                   )
                 }
               </Grid>
