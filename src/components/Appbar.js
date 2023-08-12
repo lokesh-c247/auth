@@ -11,7 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Button } from '@mui/material';
 import { MyContext } from '../App';
 import { useContext } from "react";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
