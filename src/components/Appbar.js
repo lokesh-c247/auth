@@ -85,7 +85,7 @@ export default function SearchAppBar() {
             auth ? 
             <Button sx = {{color : "white"}} onClick = {()=>{localStorage.removeItem("token"); setAuth(false); navigate("/login")}}>Logout</Button>
             :
-            <Button sx = {{color : "white"}} onClick = {()=> navigate("/login")}>LogIn</Button>
+            <Button sx = {{color : "white"}} onClick = {()=> navigate("/login")}>Login</Button>
           }
           <Search>
             <SearchIconWrapper>
