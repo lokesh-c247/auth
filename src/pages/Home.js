@@ -1,17 +1,14 @@
-import {Button, Container, Typography } from "@mui/material";
+import {Container, Typography } from "@mui/material";
 import TourCard from "../components/Tourcard";
 import Grid from '@mui/material/Grid';
 import cities from "../utility/data.json";
-import {Outlet, useNavigate, } from "react-router-dom";
-import { MyContext } from "../App";
-import { useContext } from "react";
+import {Outlet,} from "react-router-dom";
+
 
 
 const Home = () => {
-  const {setAuth} = useContext(MyContext);
- 
 
-  const navigate = useNavigate();
+ 
     return (
         <div>
       <Container sx = {{marginY : 5 }}>

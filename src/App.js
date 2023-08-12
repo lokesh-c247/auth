@@ -1,7 +1,7 @@
 import SearchAppBar from "./components/Appbar";
 import Home from "./pages/Home";
-import {BrowserRouter, createBrowserRouter, Navigate, Outlet, Route, Routes} from "react-router-dom";
-import Tour from "./pages/Tour";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+
 import Login from "./authentication/Login";
 import Signup from "./authentication/Signup";
 import { useEffect, useState } from "react";
