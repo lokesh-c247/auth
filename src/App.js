@@ -12,6 +12,8 @@ export const MyContext = createContext("");
 const App = () => {
 
   const [auth , setAuth] = useState(false);
+  const [loggedInUser,setLoggedInUser] = useState({});
+
 
   useEffect(()=>{
     const token = localStorage.getItem("token")
@@ -23,7 +25,7 @@ const App = () => {
   return (
     <>
     <BrowserRouter>
-    <MyContext.Provider value = {{auth , setAuth}}>
+    <MyContext.Provider value = {{auth , setAuth, loggedInUser, setLoggedInUser}}>
       <SearchAppBar />
       <Routes>
         {
@@ -31,16 +33,14 @@ const App = () => {
           <>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-          </>
-            
+          </>  
              : 
             <>
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             </>
-        }
-               
+        }  
       </Routes>
       </MyContext.Provider>
     </BrowserRouter>

@@ -1,9 +1,11 @@
 import Paper from '@mui/material/Paper';
-import { Grid, createTheme , ThemeProvider} from '@mui/material';
+import { Grid, createTheme , ThemeProvider, Button} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { AccessTime } from '@mui/icons-material';
 import Rating from '@mui/material/Rating';
+import { useContext, useState } from 'react';
+import { MyContext } from '../App';
 
 
 const theme = createTheme({
@@ -32,11 +34,21 @@ const theme = createTheme({
     }
 })
 
-const TourCard = ({tour}) => (
-    
+const TourCard = ({tour}) => {
+    const [totalPrice,setTotalPrice] = useState(0);
+    console.log(tour , "props");
+
+
+    const addItems = (price) => {
+     const newTotal = totalPrice +  price;
+        setTotalPrice((prevTotal) => prevTotal + totalPrice);
+        console.log(totalPrice, "total")
+    }
+
+    return (    
         <Grid item xs={3}>
             <ThemeProvider theme={theme}>
-            <Paper elevation={5} variant='outlined' >
+            <Paper elevation={0} variant='outlined' >
                 <img className='img' src={tour.image} alt="" srcSet="" />
                 <Box paddingX={2}>
                     <Typography variant='subtitle1' component="h2">{tour.name}</Typography>
@@ -56,6 +68,8 @@ const TourCard = ({tour}) => (
                 <Box>
                     <Typography variant='h5' component= "p">${tour.price}</Typography>
                 </Box>
+
+                <Button variant="outlined" size="small" onClick={()=>addItems(tour.price)}>Add to Cart</Button>
         
         
         </Box>
@@ -67,6 +81,6 @@ const TourCard = ({tour}) => (
     
     
     
-)
+    )}
 
 export default TourCard;
