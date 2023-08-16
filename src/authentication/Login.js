@@ -22,7 +22,7 @@ const defaultTheme = createTheme();
 
 export default function SignInSide() {
 
-  const {setAuth, setLoggedInUser , loggedInUser } = React.useContext(MyContext);
+  const {setAuth , loggedInUser } = React.useContext(MyContext);
 
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ export default function SignInSide() {
         return user.email === currentUser.email && user.password === currentUser.password;
      })
     if(newUsers.length > 0){
-      setLoggedInUser(newUsers[0])
+      // setLoggedInUser(newUsers[0])
       localStorage.setItem("token" , JSON.stringify(true))   
       setAuth(true);
       console.log(loggedInUser  , "loggedInUser");

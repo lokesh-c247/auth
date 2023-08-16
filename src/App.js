@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import SearchAppBar from "./components/Appbar";
 import Home from "./pages/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -12,9 +13,6 @@ export const MyContext = createContext("");
 const App = () => {
 
   const [auth , setAuth] = useState(false);
-  const [loggedInUser,setLoggedInUser] = useState({});
-
-
   useEffect(()=>{
     const token = localStorage.getItem("token")
     if(token){
@@ -25,7 +23,7 @@ const App = () => {
   return (
     <>
     <BrowserRouter>
-    <MyContext.Provider value = {{auth , setAuth, loggedInUser, setLoggedInUser}}>
+    <MyContext.Provider value = {{auth , setAuth }}>
       <SearchAppBar />
       <Routes>
         {
@@ -33,14 +31,16 @@ const App = () => {
           <>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-          </>  
+          </>
+            
              : 
             <>
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             </>
-        }  
+        }
+               
       </Routes>
       </MyContext.Provider>
     </BrowserRouter>
